@@ -1,0 +1,18 @@
+Using aiida in ComputerCanada like Cedar, Beluga and so on. 
+The modified version of aiida_commands.sh from ComputerCanada support team of Pawel:
+Login to HPC that you want to use nodes for Aiida submits work with, do things below:
+  wget https://raw.githubusercontent.com/ComputeCanada/software-stack-custom/main/bin/computecanada/allowed_commands/aiida_commands.sh
+  chmod u+x aiida_commands.sh
+  chmod u-w aiida_commands.sh
+Then generate ed25519 keys locally to generate the public and private ssh key pair. (Here, aiida_commands.sh should be HPC /home/juhuang, and in /scratch/juhuang, there is aiida dir for work submission dir.)
+  restrict,from="128.100.18.187",command="/home/juhuang/aiida_commands.sh /scratch/juhuang/aiida" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOwufZN6eWydTmO/LLnrtneoLK5w0oUqB+zLX6ql8sc2
+Upload above format of public key in alliance login account for SSH key management.
+Manage locally ~/.ssh/config to make aiida submit work to robots using the related private ssh key.
+  e.g. 
+  host CedarRobot
+    hostname robot.cedar.alliancecan.ca
+    user juhuang
+    identityfile ~/.ssh/id_ed25519
+    identitiesonly yes
+    requesttty no
+

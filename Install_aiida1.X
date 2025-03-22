@@ -20,3 +20,8 @@ After checking it runs, then install aiida-lsmo packages by:
 git clone https://github.com/lsmo-epfl/aiida-lsmo .
 cd aiida-lsmo
 pip install -e .
+
+CP2K-9.1 with DDEC, in this branch they did modification to the workchains.py file to read data from cp2k-9.1 version
+git clone -b support/aiida-1.6.X https://github.com/lsmo-epfl/aiida-ddec.git
+cd aiida-ddec
+pip install .

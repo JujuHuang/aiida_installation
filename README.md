@@ -1,2 +1,2 @@
 # aiida_installation
-Installation aiida-lsmo, aiida-cp2k, aiida-phonopy, aiida-raspa for simulations of MOFs
+Installation aiida-core, aiida-lsmo, aiida-cp2k, aiida-phonopy, aiida-raspa for related simulations of MOFs

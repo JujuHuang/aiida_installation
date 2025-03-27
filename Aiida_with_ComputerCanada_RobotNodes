@@ -1,13 +1,25 @@
-Using aiida in ComputerCanada like Cedar, Beluga and so on. 
-The modified version of aiida_commands.sh from ComputerCanada support team of Pawel:
-Login to HPC that you want to use nodes for Aiida submits work with, do things below:
+1. AiiDA on ComputerCanada with clusters, Cedar, Narval, Beluga, Graham. 
+Alliance document: https://docs.alliancecan.ca/wiki/AiiDA 
+
+2. Automate nodes without attended connections, hostnames:
+Cedar: robot.cedar.alliancecan.ca
+Graham: robot.graham.alliancecan.ca
+Béluga: robot.beluga.alliancecan.ca
+Narval: robot.narval.alliancecan.ca
+Niagara: robot.niagara.alliancecan.ca
+
+3. Setup SSH keys to avoid multifactor authentication.
+3.1 Use the modified version of aiida_commands.sh from ComputerCanada support team of Pawel:
+Login to clusters that you want to use the robot nodes for Aiida submits work with:
   wget https://raw.githubusercontent.com/ComputeCanada/software-stack-custom/main/bin/computecanada/allowed_commands/aiida_commands.sh
   chmod u+x aiida_commands.sh
   chmod u-w aiida_commands.sh
-Then generate ed25519 keys locally to generate the public and private ssh key pair. (Here, aiida_commands.sh should be HPC /home/juhuang, and in /scratch/juhuang, there is aiida dir for work submission dir.)
+
+3.2 Generate ed25519 keys locally with ssh key pair, modify the format of pub key and upload to alliance account. 
   restrict,from="128.100.18.187",command="/home/juhuang/aiida_commands.sh /scratch/juhuang/aiida" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOwufZN6eWydTmO/LLnrtneoLK5w0oUqB+zLX6ql8sc2
-Upload above format of public key in alliance login account for SSH key management.
-Manage locally ~/.ssh/config to make aiida submit work to robots using the related private ssh key.
+(Here, aiida_commands.sh is on HPC /home/juhuang, and work will be run in /scratch/juhuang/aiida)
+
+3.3 Manage locally ~/.ssh/config to make sure AiiDA will use the right private ssh key to submit work to RobotNodes.
   e.g. 
   host CedarRobot
     hostname robot.cedar.alliancecan.ca
@@ -16,6 +28,5 @@ Manage locally ~/.ssh/config to make aiida submit work to robots using the relat
     identitiesonly yes
     requesttty no
 
-Can only generate 1 ed_25519 key for all clusters of ComputerCanada, use command below to add server into the known_hosts file.
+3.4 Can only generate 1 ed_25519 key for all clusters of ComputerCanada, use command below to add server into the known_hosts file.
   ssh-keyscan -H robot.beluga.alliancecan.ca >> ~/.ssh/known_host
-
